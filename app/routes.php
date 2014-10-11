@@ -11,21 +11,19 @@
 |
 */
 
-use Badcow\LoremIpsum;
-
 Route::get('/', function()
 {
-	return "Hello World";
+	$name = "Johanna";
+    return View::make('index')
+        ->with('name', $name);
 });
 
 Route::get('package-test', function ()
 {
-    //echo Paste\Pre::render($_SERVER,'Server');
+    $string_generator = new Xi\RandomString\RandomStringGenerator();
+    echo $string_generator->generate(10)."<br><br>";
 
-    //echo Xi\RandomString::generate(10);
-
-    $generator = new LoremIpsum\Generator();
-    $paragraphs = $generator->getParagraphs(5);
+    $generator = new LoremGenerator();
+    $paragraphs = $generator->getParagraphs(2);
     echo implode('<p>', $paragraphs);
-
 });

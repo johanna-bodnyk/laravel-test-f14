@@ -21,8 +21,9 @@ Route::get('/', function()
 Route::get('package-test', function ()
 {
     $string_generator = new Xi\RandomString\RandomStringGenerator();
-    echo $string_generator->generate(10)."<br><br>";
-
+    $my_random_string = $string_generator->generate(10);
+    echo "Here's a random string: ".$my_random_string."<br><br>";
+    
     $generator = new LoremGenerator();
     $paragraphs = $generator->getParagraphs(2);
     echo implode('<p>', $paragraphs);

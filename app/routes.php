@@ -11,6 +11,8 @@
 |
 */
 
+use Badcow\LoremIpsum;
+
 Route::get('/', function()
 {
 	return "Hello World";
@@ -18,5 +20,12 @@ Route::get('/', function()
 
 Route::get('package-test', function ()
 {
-    echo Paste\Pre::render($_SERVER,'Server');
+    //echo Paste\Pre::render($_SERVER,'Server');
+
+    //echo Xi\RandomString::generate(10);
+
+    $generator = new LoremIpsum\Generator();
+    $paragraphs = $generator->getParagraphs(5);
+    echo implode('<p>', $paragraphs);
+
 });

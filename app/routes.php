@@ -13,5 +13,10 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return "Hello World";
+});
+
+Route::get('package-test', function ()
+{
+    echo Paste\Pre::render($_SERVER,'Server');
 });

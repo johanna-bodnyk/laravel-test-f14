@@ -18,13 +18,14 @@ Route::get('/', function()
         ->with('name', $name);
 });
 
-Route::get('package-test', function ()
+Route::get('package-test', function()
 {
     $string_generator = new Xi\RandomString\RandomStringGenerator();
     $my_random_string = $string_generator->generate(10);
     echo "Here's a random string: ".$my_random_string."<br><br>";
-    
+
     $generator = new LoremGenerator();
-    $paragraphs = $generator->getParagraphs(2);
+    $paragraphs = $generator->getParagraphs(5);
+    echo "And here are five paragraphs of lorem ipsum text:<br><br>";
     echo implode('<p>', $paragraphs);
 });

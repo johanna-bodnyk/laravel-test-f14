@@ -7,7 +7,7 @@ In today's section I encountered two issues while demonstrating how to install a
 
 ## Issue 1: Xi\RandomString
 
-As an example, I searched Packagist and found a package called Xi\RandomString meant to produce a random string of characters:
+As an example to demonstrate installing a package, I searched Packagist and found a package called Xi\RandomString meant to produce a random string of characters:
 
 * [Xi\RandomString on Packagist](https://packagist.org/packages/xi/randomstring)
 * [Xi\RandomString on Github](https://github.com/xi-project/xi-randomstring)
@@ -32,7 +32,7 @@ However, the following will *still* produce an error:
 
 <img src="http://laravel-test.higabba.biz/images/section-notes-2014-10-11_2.png">
 
-This second issue is that, again unlike Paste\Pre, the RandomStringGenerator class's methods can not be accessed statically (using the Class::method() syntax). Instead you must first instantiate a RandomStringGenerator, and then call the class's methods on that object, as follows:
+This second issue is that, again unlike Paste\Pre, the RandomStringGenerator class's methods cannot be accessed statically (using the Class::method() syntax). Instead you must first instantiate a RandomStringGenerator object, and then call the class's methods on that object, as follows:
 
 ```php
     $string_generator = new Xi\RandomString\RandomStringGenerator();
@@ -42,7 +42,7 @@ This second issue is that, again unlike Paste\Pre, the RandomStringGenerator cla
 
 This, finally, will echo a random string of 10 characters! [Success!](http://laravel-test.higabba.biz/package-test)
 
-Some packages, including the two suggested by Professor Buck for P3, will provide some hints in the README about how the package's classes and methods can be accessed and used. If they don't, or if you need more detail, you will likely need to dig into the package's file structure and code to find out how to use it. For instance, [you can see here](https://github.com/xi-project/xi-randomstring/tree/master/library/Xi/RandomString) that RandomStringGenerator is the actual class, and it lives in the folders Xi/RandomString (its namespace). [Looking at the RandomStringGenerator class code itself,](https://github.com/xi-project/xi-randomstring/blob/master/library/Xi/RandomString/RandomStringGenerator.php) you can see that its methods are not static, so you have to instantiate an object to use them. You can also see that the `generate()` method a single parameter, which is the length of the string to be generated.
+Some packages, including the two suggested by Professor Buck for P3, will provide some hints in the README about how the package's classes and methods can be accessed and used. If they don't, or if you need more detail, you will likely need to dig into the package's file structure and code to find out how to use it. For instance, [you can see here](https://github.com/xi-project/xi-randomstring/tree/master/library/Xi/RandomString) that RandomStringGenerator is the actual class, and it lives in the folders Xi/RandomString (its namespace). [Looking at the RandomStringGenerator class code itself,](https://github.com/xi-project/xi-randomstring/blob/master/library/Xi/RandomString/RandomStringGenerator.php) you can see that its methods are not static, so you have to instantiate an object to use them. You can also see that the `generate()` method takes a single parameter, which is the length of the string to be generated.
 
 ## Issue 2: Badcow\LoremIpsum
 
@@ -68,7 +68,7 @@ The issue arose when I tried to add an alias to `/app/config/app.php`. Here's wh
 ),
 ```
 
-[Note: this is not a JSON file, so that trailing comma is not an issue.]
+*Note: this is not a JSON file, so that trailing comma is not an issue.*
 
 In my package-test route, I then changed the code to:
 
@@ -84,9 +84,9 @@ This produced an error, saying the class 'Lorem\Generator' was not found. The is
     'LoremGenerator'  => 'Badcow\LoremIpsum\Generator',
 ```
 
-[Note that I can call my alias--the part on the left--almost anything I want, though the class name "Generator" happens to be reserved in php, so I can't use it as an alias name.] 
+*Note that I can call my alias--the part on the left--almost anything I want, though the class name "Generator" happens to be reserved in php, so I can't use it as an alias name.* 
 
-After fixing the alias definition I can now call the `Badcow\LoremIpsum\Generator()` class, aliased as `LoremGenerator`, as follows:
+After fixing the alias definition I can now call the `Badcow\LoremIpsum\Generator` class, aliased as `LoremGenerator`, as follows:
 
 ```php
     $generator = new LoremGenerator();
@@ -94,3 +94,6 @@ After fixing the alias definition I can now call the `Badcow\LoremIpsum\Generato
     echo implode('<p>', $paragraphs);
 ```
 
+## Try it yourself!
+
+So...based on the examples above, how would you create an alias for the Xi\RandomString package to avoid typing `Xi\RandomString\RandomStringGenerator()` every time you want to use it?

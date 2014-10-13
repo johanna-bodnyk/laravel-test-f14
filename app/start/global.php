@@ -79,3 +79,9 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+
+/* Require the Form Macros File */
+
+require app_path().'/macros.php';

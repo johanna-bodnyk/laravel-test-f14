@@ -18,11 +18,19 @@ Route::get('/', function()
         ->with('name', $name);
 });
 
+Route::get('macro-test', function() {
+    return Form::fullName();
+});
+
+
 Route::get('package-test', function()
 {
     $string_generator = new Xi\RandomString\RandomStringGenerator();
     $my_random_string = $string_generator->generate(10);
     echo "Here's a random string: ".$my_random_string."<br><br>";
+
+    $faker = Faker::create();
+    echo $faker->name.'<br>';
 
     $generator = new LoremGenerator();
     $paragraphs = $generator->getParagraphs(5);

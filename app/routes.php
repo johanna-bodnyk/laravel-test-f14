@@ -102,7 +102,6 @@ Route::post('for-loop', function() {
 
 });
 
-
 Route::get('mysql-test', function() {
 
     # Print environment
@@ -147,3 +146,5 @@ Route::get('package-test', function()
     echo "And here are five paragraphs of lorem ipsum text:<br><br>";
     echo implode('<p>', $paragraphs);
 });
+
+Route::get('controller-test', 'TestController@controller_test');

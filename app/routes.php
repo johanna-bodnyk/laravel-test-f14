@@ -19,6 +19,48 @@ Route::get('/', function()
 
 });
 
+Route::get('signup', function () {
+    return View::make('signup');
+});
+
+Route::post('signup', function () {
+
+    $user = new User;
+    $user->firstname = Input::get('firstname');
+    $user->lastname = Input::get('lastname');
+    $user->email = Input::get('email');
+    $user->age = Input::get('age');
+    $user->password = Hash::make(Input::get('password'));
+    $user->save();
+
+    $data = array('user' => $user);
+
+    Mail::send('emails.welcome', $data, function($message) {
+
+        // $recipient_email = $user->email;
+        // $recipient_name  = $user->firstname.' '.$user->lastname;
+        // $subject  = 'Welcome '.$user->firstname.'!';
+
+        // $message->to($recipient_email, $recipient_name)->subject($subject);
+
+        $message->to('bodnyk@gmail.com', "Johanna Bodnyk")->subject("Welcome, Johanna!");
+
+    });
+
+    return "User ".$user->email." successfully created!";
+});
+
+Route::get('under-thirty', function() {
+
+    $youngsters = DB::table("users")->where('age', '<', '30')->select('email', 'age')->get();
+
+    foreach ($youngsters as $youngster) {
+        echo $youngster->email." is ".$youngster->age."<br>";
+    }
+
+});
+
+
 Route::get('form-test', function()
 {
     return View::make('form-test');
@@ -115,6 +157,12 @@ Route::get('mysql-test', function() {
 
 });
 
+
+Route::get('/get-environment',function() {
+
+    echo "Environment: ".App::environment();
+
+});
 
 Route::get('phpinfo', function()
 {

@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => $_ENV['PASSWORD'],
+	'password' => $_ENV['EMAIL_PASSWORD'],
 
 	/*
 	|--------------------------------------------------------------------------
